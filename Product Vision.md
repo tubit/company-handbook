@@ -20,7 +20,7 @@ The scenario probably sounds familiar. And there were plenty of infrastructure t
 
 * Rule-based. The tools assume that you know what your problem is, and that you know what you're looking for. And they work well in that situation. But not so much if the tool didn't create the resource. You just don't see it in your inventory. You can establish rules for tagging, etc. - but if you have 200 engineers, automated systems, something will aways fall by the way-side and the rules don't work.
 
-* "Rows & columns". The tools produce a long list of resources, sometimes in a pretty UI, but don't show any dependencies. You couldn't really understand a resource's "blast radius" if you wanted delete it.
+* "Rows & columns". The tools produce a long list of resources, sometimes in a pretty UI, but don't show any dependencies. You couldn't really understand a resource's "blast radius" if you wanted to delete it.
 
 * Context. There's no context for any individual resource. If it's not tagged, it's hard to understand for e.g. Finance why the resource is running. It comes back on the SREs to explain it.
 
@@ -114,3 +114,24 @@ That way - Cloudkeeper is one powerful abstraction layer across the entire digit
 
 * Once a day we collect the latest pricing and open benchmarking data for all cloud providers, and share that part of our graph with everyone else.
 Our users have started to adopt Cloudkeeper as their “source of truth” to document their digital infrastructure, instead of e.g. their existing CMDBs.
+
+## 5-Year Vision: The platform for universal search and workflows for digital infrastructure.
+
+Cloudkeeper is the established tool to collect metadata from millions and millions of resources. Keepercore is the underlying graph platform to store, annotate and navigate the resources.  
+
+As our use cases have expanded, our users want to start offering the benefits of universal search and workflow for digital infrastructure to their customers. They embed Cloudkeeper and Keepercore into their own products.
+In the example of the valves and the fertilizer plant, the plant operator retrofitted the valves by connecting them via Raspberry Pis and writing the plug-in.
+
+Now, it’s the valve manufacturers themselves who standardize and expose attributes of their valves, write the Cloudkeeper plug-ins, and define standard workflow templates. A workflow template could be a maintenance alert and dispatch when the valve achieves a certain age or total lifetime throughput.
+
+Instead of “just” selling valves, a manufacturer bundles valve, Raspberry Pi, Keepercore, plug-in and workflow templates into a subscription for a “digital valve” or a “valve cloud” that carries the manufacturer’s own brand. The valve manufacturer also maintains connectivity to all valves across its customer base, collecting the aggregate data set. Because Cloudkeeper is open, standardized and abstracted - the “valve cloud” is plug-and-play and integrates with a plant operators’ existing digital / cloud infrastructure. The valves and Raspberry Pis again become searchable, discoverable and programmable.
+
+By turning a physical product into a programmable infrastructure resource, companies open up new types of business models and income streams, such as subscription revenue. There are benefits for all parties. With the subscription, the plant operator has the benefit of turning upfront Capex into an operating expense. As the maintainers of the project, Some Engineering contributes with certifications, training and support.
+
+* We keep our customers’ entire digital infrastructure clean.
+
+* We’ve launched a development platform, to build and publish custom-branded infrastructure workflow apps via the web and cloud marketplaces. These stores offer distribution and commercialization options for our customers and partners. We build the integrations to automate onboarding and listing for these marketplaces.
+
+* Customers use Cloudkeeper to maintain their entire digital infrastructure - across cloud, edge, IoT, SaaS, data, software. We hear from customers how they are replacing their “rows and columns” CMDBs with a graph maintained in Keepercore.
+
+* Our customers consider us like their Air Traffic Control, to supervise their infrastructure and act before something catastrophic happens, e.g. when a user starts a database that's not encrypted. 
