@@ -1,9 +1,9 @@
-#Our Product Vision
+# Our Product Vision
 Our product vision describes how we think about building Cloudkeeper over the next ten years.
 
 The name "Cloudkeeper" btw is derived from "Housekeeping for Clouds" - just like a Housekeeper looks after a house, Cloudkeeper looks after your cloud.
 
-##Our Origin and How This Vision Will Evolve Over Time
+## Our Origin and How This Vision Will Evolve Over Time
 Our co-founder Lukas started developing Cloudkeeper in late 2019 as an internal project at D2iQ (formerly Mesosphere).
 
 At the time, Lukas was an SRE at D2iQ and needed a tool to give him the big picture of all cloud resources running, automate their documentation, and reduce spend.
@@ -39,3 +39,9 @@ Cloud-native architectures have caused a change in the way companies operate the
 Developers are in the driver's seat - they determine what cloud services they want to use, and spin up resources as needed. The goal is feature velocity, and to ship new digital products faster. But - the larger and more distributed an organization gets, the more challenges these new dynamic environments create.
 
 CI/CD pipelines and tear down jobs fail. Things break and don’t get cleaned up - the result is drift, and a rising cloud bill. Despite garbage collection, “stuff” is leaking. Artifacts get left behind, growing the number of orphaned resources. It’s not just servers, databases and VPCs. It’s also things like accounts, SSH keys, IAM policies, roles and certificates, volumes and their snapshots and dynamic IP addresses. It’s a long tail of resources.
+
+## The problem is getting worse. 
+
+This is serious, because drift causes all sorts of downtime issues. Today’s infrastructure management tools don’t offer a solution. They do a good job of managing resources they know about. But they do a poor job managing resources they didn't create.
+
+For SREs in charge of maintaining cloud infrastructure, it’s a drag. They are usually outnumbered by developers by a factor of 50-80x. At the same time, SREs are expected to build features that increase development velocity. Over time, that widens “the gap” between the desired state and the actual state of the infrastructure.
