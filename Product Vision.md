@@ -18,11 +18,11 @@ And so the order came down from the CEO and the CFO to reduce cloud spend, and b
 
 The scenario probably sounds familiar. And there were plenty of infrastructure tools out there at the time that promised a solution. But they all had the same drawbacks:
 
-- Rule-based. The tools assume that you know what your problem is, and that you know what you're looking for. And they work well in that situation. But not so much if the tool didn't create the resource. You just don't see it in your inventory. You can establish rules for tagging, etc. - but if you have 200 engineers, automated systems, something will aways fall by the way-side and the rules don't work.
+* Rule-based. The tools assume that you know what your problem is, and that you know what you're looking for. And they work well in that situation. But not so much if the tool didn't create the resource. You just don't see it in your inventory. You can establish rules for tagging, etc. - but if you have 200 engineers, automated systems, something will aways fall by the way-side and the rules don't work.
 
-- "Rows & columns". The tools produce a long list of resources, sometimes in a pretty UI, but don't show any dependencies. You couldn't really understand a resource's "blast radius" if you wanted delete it.
+* "Rows & columns". The tools produce a long list of resources, sometimes in a pretty UI, but don't show any dependencies. You couldn't really understand a resource's "blast radius" if you wanted delete it.
 
-- Context. There's no context for any individual resource. If it's not tagged, it's hard to understand for e.g. Finance why the resource is running. It comes back on the SREs to explain it.
+* Context. There's no context for any individual resource. If it's not tagged, it's hard to understand for e.g. Finance why the resource is running. It comes back on the SREs to explain it.
 
 Lukas wanted a tool that periodically collects a list of resources in cloud accounts, provides metrics about them, and can clean them up. Rather than creating yet another list with "rows and columns", he chose to store information in a graph. The graph reflects dependencies and also stores context.
 
@@ -63,20 +63,54 @@ Cloudkeeper is a horizontal product that supports AWS and GCP. That is more for 
 
 Cloudkeeper is an expert tool for engineers that runs on top of the Keepercore graph platform. They interact with Cloudkeeper via a command line interface (CLI), a tool all engineers are familiar and comfortable working with.
 
-- We keep their cloud infrastructure permanently clean.
+* We keep their cloud infrastructure permanently clean.
 
-- The Cloudkeeper Query Language offers an abstraction layer for engineers to query and collect metrics from their infrastructure. Think `> match is(instance) and tags.owner ~ jane` e.g. to find all compute instances across AWS and GCP owned by Jane.  
+* The Cloudkeeper Query Language offers an abstraction layer for engineers to query and collect metrics from their infrastructure. Think `> match is(instance) and tags.owner ~ jane` e.g. to find all compute instances across AWS and GCP owned by Jane.  
 
-- We collect bare metal information. Hardware specs differ, even for the same type of instance. Pre-deployment we give developers estimates about the fastest / cheapest hardware per region, and once they have the instance let them know exactly what they got.  
+* We collect bare metal information. Hardware specs differ, even for the same type of instance. Pre-deployment we give developers estimates about the fastest / cheapest hardware per region, and once they have the instance let them know exactly what they got.  
 
-- We integrate with Terraform and show the difference between the planned state and the current state of infrastructure in our CLI.
+* We integrate with Terraform and show the difference between the planned state and the current state of infrastructure in our CLI.
 
-- On top of the CLI, we will build a UI/UX that makes navigation with the resource graph intuitive. Someone can search, navigate and click on resources in the graph. They can annotate and build workflows across all resources.
+* On top of the CLI, we will build a UI/UX that makes navigation with the resource graph intuitive. Someone can search, navigate and click on resources in the graph. They can annotate and build workflows across all resources.
 
-- Users receive notifications when resources relevant to them change, via integrations with popular “ChatOps” tools like Slack, Teams and Discord.
+* Users receive notifications when resources relevant to them change, via integrations with popular “ChatOps” tools like Slack, Teams and Discord.
 
-- We offer an approval workflow within these tools (“Cloudkeeper will delete these resources. Are you ok with that?”).
+* We offer an approval workflow within these tools (“Cloudkeeper will delete these resources. Are you ok with that?”).
 
-- We start with collecting metrics from AWS and GCP cloud services most relevant for users, and expand the number of supported services with each sprint based on what the community is telling us.
+* We start with collecting metrics from AWS and GCP cloud services most relevant for users, and expand the number of supported services with each sprint based on what the community is telling us.
 
-- Because Cloudkeeper is extensible and open source, the community can build plug-ins and collect metrics from any AWS or GCP service that we do not support yet. Our SDK makes building new, custom plug-ins to collect data easy.
+* Because Cloudkeeper is extensible and open source, the community can build plug-ins and collect metrics from any AWS or GCP service that we do not support yet. Our SDK makes building new, custom plug-ins to collect data easy.
+
+## 3-Year Vision: Anyone in a company can search their digital infrastructure and build workflows
+
+We make it easy for engineers and all other company stakeholders (Finance, Legal, Product, Customer Success, etc.) to explore and navigate a company’s entire digital infrastructure. They can build workflows, dashboards and reports in a browser, relevant for their business needs, and export metrics to their favorite tools. They don’t need to talk to an engineer anymore, which saves everyone time.
+
+For example, Legal builds an inventory of workflows that verify ongoing infrastructure compliance with regulatory frameworks such as HIPAA, SOC or FedRAMP. Finance pulls cloud cost metrics down to the individual product and user level and exports them to their Snowflake data warehouse. For a sustainability report, engineering calculates a company’s annual carbon footprint based on the hardware profiles of their cloud servers.
+
+By now, Cloudkeeper covers the major global (AWS, GCP, Azure, Alibaba), specialized (Digital Ocean, Oracle, IBM, etc.) and private / hybrid clouds such as VMWare and Red Hat.
+
+We’ve expanded beyond the cloud, and also collect metadata from other infrastructure such as IoT devices - Raspberry Pi, industrial appliances, etc. Either directly, or through community-supported plug-ins. If something has an IP address, we can collect metadata and metrics - and that opens up new (vertical) use cases. Cloud computing is not the only infrastructure where it’s useful to be able to search, query resources, build workflows or have metrics and have event triggers. In short, reacting to changes. Something changes, and you want to be able to react to it. That’s useful for any digital infrastructure.
+
+Say the valves of a fertilizer plant have embedded sensors. The sensors only have an analog serial interface and are not connected to the Internet. If the plant operator retrofits each valve with a Raspberry Pi, then Cloudkeeper collects data from both the Pis and the sensors, and integrates them into the overall company infrastructure graph. The plant operator builds the Cloudkeeper plug-in for the valves and defines the valve-specific primitives / attributes (e.g. ``pressure``, ``throughput``, ``temperature``) to collect, in addition to any applicable common attributes (e.g. ``atime``, ``ctime``). Cloudkeeper provides an MQTT bridge that integrates with existing IoT infrastructure and allows attribute updates via an industry standard protocol.
+
+Because of this abstraction via the primitives and our declarative query language - the Pis and valves are each just one more infrastructure component that users can discover, query and build workflows for. As the Valves get replaced over time, their spec and even their brand may change. All the plant operator needs to do is write a new plug-in for a new spec / brand, and collect the same primitives. That means existing queries, workflows and automation for the entire plant will keep working.
+
+We also collect metadata from popular SaaS / software tools, e.g. for identity (Okta, OneLogin), source code management (GitLab, GitHub) or ERP (Netsuite, SAP). These tools are now sources, not just destinations / integrations where we export to.
+
+That way - Cloudkeeper is one powerful abstraction layer across the entire digital infrastructure - cloud, hybrid, IoT, SaaS, software. We collect their attributes and do not care what those are - we store them in the graph, document dependencies, make them searchable, aggregatable, and then actionable by triggering alerts and workflows on events for those metrics.
+
+* We’ve launched a no-code UI/UX for non-technical users. They can explore a company’s digital infrastructure and build workflows in a browser.
+
+* Running infrastructure is a collaborative effort. We’ve built functionality so users can share and discover workflow templates that other people have built. This raises overall productivity.
+
+* The productivity benefits of Cloudkeeper are so high and so useful that Cloudkeeper is among the first three tools any engineer uses for a cloud project:
+  * GitHub to maintain versions of their infrastructure config as code
+  * Terraform to deploy infrastructure
+  * Cloudkeeper to maintain infrastructure.
+
+* Because we’re open source, anyone can contribute and build plugins for company- and industry-specific digital infrastructure.
+
+* Customers share their basic graph structure with us. We can train a model with that data set, infer typical ways of architecting cloud native services and help customers detect anomalies in their infrastructure.
+
+* Once a day we collect the latest pricing and open benchmarking data for all cloud providers, and share that part of our graph with everyone else.
+Our users have started to adopt Cloudkeeper as their “source of truth” to document their digital infrastructure, instead of e.g. their existing CMDBs.
