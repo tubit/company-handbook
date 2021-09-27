@@ -134,4 +134,24 @@ By turning a physical product into a programmable infrastructure resource, compa
 
 * Customers use Cloudkeeper to maintain their entire digital infrastructure - across cloud, edge, IoT, SaaS, data, software. We hear from customers how they are replacing their “rows and columns” CMDBs with a graph maintained in Keepercore.
 
-* Our customers consider us like their Air Traffic Control, to supervise their infrastructure and act before something catastrophic happens, e.g. when a user starts a database that's not encrypted. 
+* Our customers consider us like their Air Traffic Control, to supervise their infrastructure and act before something catastrophic happens, e.g. when a user starts a database that's not encrypted.
+
+## 10-Year Vision: A creator platform for digital infrastructure
+
+Ten years out is an entire platform cycle in computing. Today, we’re still in the early stages of a number of generational technology and socio-economic shifts. Cloud, edge, IoT, 5G, AI/ML, autonomous cars, blockchain / crypto, NFTs, AR/VR, voice, vision, ESG, creators, remote work, millennials / Gen Z - the list goes on. There’s no shortage of new digital infrastructure companies have to deal with.
+
+It’s a giant mess.
+
+By 2031 these shifts will be at the tail end of their maturity cycle. Meanwhile, they will only drive up the variety of digital infrastructure companies have to work with. While a giant mess, it’s also a giant opportunity for new markets and services. The need for clean, resilient and programmable digital infrastructure only goes up.
+
+With our open source and plug-in approach, we can support any and all of these new infrastructures. Customers will need to work with data-, blockchain- and IoT infrastructure in similar ways the same way they’re working with cloud infrastructure today. New services might have new interfaces.
+
+But the basic properties will stay the same - there’s going to be some resource connected to some network, and the resources will have properties and attributes. As long as these primitives hold true, we can collect them and be useful. We may start with a limited set of primitives for each new infrastructure and its resources, but over time our coverage / depth will always go up.
+
+* We will replace point solutions to understand and map out any of these new types of infrastructures. There will always be a tension between a monolithic management layer that ships with a product, vs. a platform like ours.  
+
+* Our plug-in, no-code and query language approach lowers the barrier to work with any type of infrastructure. We think customers will value that simplicity and adoption speed.
+
+* Because we cover all these platforms, with a large reach, we’re becoming a de-facto standard that other companies adopt when they ship their products / infrastructure elements. We attract more developers and creators that want to build custom apps.
+
+* We’ve launched a Marketplace where our community of developers and ISVs can develop, distribute and monetize their services and infrastructure workflow apps.
